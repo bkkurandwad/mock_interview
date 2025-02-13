@@ -17,6 +17,7 @@
     "@hookform/resolvers": "^3.7.0",
     "@material-tailwind/react": "^2.1.9",
     "@neondatabase/serverless": "^0.9.3",
+    "@netlify/next": "^1.4.9",
     "@radix-ui/react-accordion": "^1.2.0",
     "@radix-ui/react-collapsible": "^1.1.0",
     "@radix-ui/react-dialog": "^1.0.5",
