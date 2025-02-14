@@ -9,7 +9,7 @@ import { toast } from "sonner";
 import { chatSession } from "@/utils/GeminiAIModal";
 import { db } from "@/utils/db";
 import { UserAnswer } from "@/utils/schema";
-import { useUser } from "@clerk/nextjs";
+import { useUser } from "../../../../../../../useUser";
 import moment from "moment";
 import { WebCamContext } from "@/app/dashboard/[idnumber]/layout";
 import { GoogleGenerativeAI } from "@google/generative-ai";

@@ -13,9 +13,10 @@ import {
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useMemo } from "react";
+import Cookies from "js-cookie";
 
 const Feedback = ({ params }) => {
-  const idnumber = 1;
+  const idnumber = Cookies.get("userMail");
   const router = useRouter();
   const [feedbackList, setFeedbackList] = useState([]);
 

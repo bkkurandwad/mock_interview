@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import Cookies from "js-cookie";
 
 import {
   Dialog,
@@ -18,11 +19,14 @@ import { LoaderCircle } from "lucide-react";
 import { db } from "@/utils/db";
 import { MockInterview } from "@/utils/schema";
 import { v4 as uuidv4 } from "uuid";
-import { useUser } from "@clerk/nextjs";
+import { useUser } from "../../../../useUser";
 import moment from "moment";
 import { useRouter } from "next/navigation";
 
 const AddNewInterview = ({userName}) => {
+  const userEmail = decodeURIComponent(userName);
+  Cookies.set("userMail", userEmail);
+  console.log("Cookies set as userMail", userEmail);
   const [openDailog, setOpenDialog] = useState(false);
   const [jobPosition, setJobPosition] = useState();
   const [jobDesc, setJobDesc] = useState();
@@ -63,7 +67,7 @@ const AddNewInterview = ({userName}) => {
           jobPosition: jobPosition,
           jobDesc: jobDesc,
           jobExperience: jobExperience,
-          createdBy: userName,
+          createdBy: user?.primaryEmailAddress.emailAddress,
           createdAt: moment().format("YYYY-MM-DD"),
         })
         .returning({ mockId: MockInterview.mockId });
@@ -72,7 +76,7 @@ const AddNewInterview = ({userName}) => {
 
       if (resp) {
         setOpenDialog(false);
-        router.push("/dashboard/[idnumber]/interview/" + resp[0]?.mockId);
+        router.push("/dashboard/" + user?.primaryEmailAddress.emailAddress + "/interview/" + resp[0]?.mockId);
       }
     } else {
       console.log("ERROR");
@@ -163,3 +167,11 @@ const AddNewInterview = ({userName}) => {
 };
 
 export default AddNewInterview;
+
+  // const userEmail = Cookies.get("userMail");
+
+//   const user = {
+//     primaryEmailAddress: {
+//         emailAddress: userEmail
+//     }
+// };

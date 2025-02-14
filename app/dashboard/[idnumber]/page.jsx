@@ -4,10 +4,13 @@ import React, { useEffect } from "react";
 import AddNewInterview from "./_components/AddNewInterview";
 import InterviewList from "./_components/InterviewList";
 import { useParams } from "next/navigation";
+import Cookies from "js-cookie";
 
 const Dashboard = () => {
   const params = useParams();
   const { idnumber } = params; 
+
+
   useEffect(() => {
     console.log(idnumber);
   }, [idnumber]);
@@ -20,7 +23,7 @@ const Dashboard = () => {
         <AddNewInterview userName={idnumber}/>
       </div>
 
-      <InterviewList/>
+      <InterviewList userName={idnumber}/>
     </div>
   );
 };

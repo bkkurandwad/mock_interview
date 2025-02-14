@@ -5,7 +5,9 @@ import { UserButton } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
 import { ModeToggle } from "@/components/ModeToggle";
 import Link from "next/link";
+import { useUser } from "../../../../useUser"
 const Header = ({ logo }) => {
+  const { user } = useUser();
   const [isUserButtonLoaded, setUserButtonLoaded] = useState(false);
   const [isOpen, setIsOpen] = useState(false)
 
@@ -37,26 +39,26 @@ const Header = ({ logo }) => {
           <Image src={logo} width={80} height={80} alt="logo" />
         </Link>
         <ul className="hidden md:flex gap-6">
-          <Link href="/dashboard">
+         <Link href={`/dashboard/${user?.primaryEmailAddress?.emailAddress || 1}`}>
             <li
               className={`hover:text-black hover:font-bold transition-all cursor-pointer ${
-                path == "/dashboard" && "text-black font-bold"
+                path == `/dashboard/${user?.primaryEmailAddress?.emailAddress || 1}` && "text-black font-bold"
               }`}
             >
               Dashboard
             </li>
           </Link>
-          <Link href="/dashboard/question">
+          <Link href={`/dashboard/${user?.primaryEmailAddress?.emailAddress || 1}/question`}>
           <li
             className={`hover:text-black hover:font-bold transition-all cursor-pointer ${
               path == "/dashboard/question" && "text-black font-bold"
             }`}
           >
-            Questions
+            Questions 
           </li>
           </Link>
           
-          <Link href="/dashboard/upgrade">
+          <Link href={`/dashboard/${user?.primaryEmailAddress?.emailAddress || 1}/upgrade`}>
             <li
               className={`hover:text-black hover:font-bold transition-all cursor-pointer ${
                 path == "/dashboard/upgrade" && "text-black font-bold"
@@ -66,7 +68,7 @@ const Header = ({ logo }) => {
             </li>
           </Link>
 
-          <Link href="/dashboard/howit">
+          <Link href={`/dashboard/${user?.primaryEmailAddress?.emailAddress || 1}/howit`}>
             <li
               className={`hover:text-black hover:font-bold transition-all cursor-pointer ${
                 path == "/dashboard/howit" && "text-black font-bold"
@@ -99,7 +101,7 @@ const Header = ({ logo }) => {
         <div className="md:hidden">
           <div className="px-5">
           <ul className="px-2 pt-2 pb-3 space-y-1 sm:px-3" >
-          <Link href="/dashboard">
+          <Link href={`/dashboard/${user?.primaryEmailAddress?.emailAddress || 1}`}>
             <li
               className={`hover:text-black hover:font-bold transition-all cursor-pointer ${
                 path == "/dashboard" && "text-black font-bold"
@@ -108,7 +110,7 @@ const Header = ({ logo }) => {
               Dashboard
             </li>
           </Link>
-          <Link href="/dashboard/question">
+          <Link href={`/dashboard/${user?.primaryEmailAddress?.emailAddress || 1}/question`}>
           <li
             className={`hover:text-black hover:font-bold transition-all cursor-pointer ${
               path == "/dashboard/question" && "text-black font-bold"
@@ -117,7 +119,7 @@ const Header = ({ logo }) => {
             Questions
           </li>
           </Link>
-          <Link href="/dashboard/upgrade">
+          <Link href={`/dashboard/${user?.primaryEmailAddress?.emailAddress || 1}/upgrade`}>
             <li
               className={`hover:text-black hover:font-bold transition-all cursor-pointer ${
                 path == "/dashboard/upgrade" && "text-black font-bold"
@@ -126,7 +128,7 @@ const Header = ({ logo }) => {
               Upgrade
             </li>
           </Link>
-          <Link href="/dashboard/howit">
+          <Link href={`/dashboard/${user?.primaryEmailAddress?.emailAddress || 1}/howit`}>
             <li
               className={`hover:text-black hover:font-bold transition-all cursor-pointer ${
                 path == "/dashboard/howit" && "text-black font-bold"

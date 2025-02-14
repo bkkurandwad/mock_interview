@@ -4,8 +4,10 @@ import Head from 'next/head';
 import Contect from './_components/Contect';
 import Link from 'next/link';
 import { FaGithub } from "react-icons/fa";
+import Cookies from 'js-cookie';
 
 const page = () => {
+  const userMail = Cookies.get("userMail");
   return (
     // <div className='p-10 flex flex-col items-center justify-center' >
     //   <h1 className='red font-bold text-[22px]'>Welcome to AI Mock Interview</h1>
@@ -59,7 +61,7 @@ const page = () => {
           <p className="mt-4 text-lg md:text-xl text-white ">Practice with AI-powered mock interviews and get personalized feedback</p>
           <div className="mt-6 flex flex-col md:flex-row">
             <a
-              href="/dashboard"
+              href={`/dashboard/${userMail}`}
               className="px-6 py-3 mb-4 md:mb-0 md:mr-4 text-lg font-semibold bg-white !text-primary-600 rounded-lg shadow-lg hover:bg-gray-100"
             >
               Get Started

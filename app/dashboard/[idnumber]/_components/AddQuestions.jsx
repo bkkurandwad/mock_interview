@@ -16,7 +16,7 @@ import { LoaderCircle } from "lucide-react";
 import { chatSession } from "@/utils/GeminiAIModal";
 import { v4 as uuidv4 } from "uuid";
 import { db } from "@/utils/db";
-import { useUser } from "@clerk/nextjs";
+import { useUser } from "../../../../useUser";
 import moment from "moment";
 import { Question } from "@/utils/schema";
 import { useRouter } from "next/navigation";
@@ -93,7 +93,7 @@ const AddQuestions = () => {
         if (resp) {
           setOpenDialog(false);
 
-          router.push("/dashboard/pyq/" + resp[0]?.mockId);
+          router.push("/dashboard/"+ user?.primaryEmailAddress.emailAddress +"/pyq/" + resp[0]?.mockId);
         }
       } else {
         console.log("ERROR");

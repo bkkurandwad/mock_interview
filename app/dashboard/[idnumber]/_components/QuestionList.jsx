@@ -1,14 +1,16 @@
 "use client";
-import { useUser } from "@clerk/nextjs";
+import { useUser } from "../../../../useUser";
 import React, { useEffect, useState } from "react";
 import { db } from "@/utils/db";
 import { Question } from "@/utils/schema";
 import { desc, eq } from "drizzle-orm";
 import QuestionItemCard from "./QuestionItemCard";
 import { Skeleton } from "@/components/ui/skeleton";
+import Cookies from "js-cookie";
 
 const QuestionList = () => {
   const { user } = useUser();
+  const mail = Cookies.get("userMail");
   const [questionList, setQuestionList] = useState([]);
 
   useEffect(() => {
@@ -16,10 +18,11 @@ const QuestionList = () => {
   }, [user]);
 
   const GetQuestionList = async () => {
+    console.log('getting question list for user : ', mail);
     const result = await db
       .select()
       .from(Question)
-      .where(eq(Question.createdBy, user?.primaryEmailAddress?.emailAddress))
+      .where(eq(Question.createdBy, mail))
       .orderBy(desc(Question.id));
 
     console.log(result);
